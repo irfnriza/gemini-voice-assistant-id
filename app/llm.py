@@ -1,22 +1,23 @@
+# file llm.py 
+
 import os
-from google import genai
-from google.genai import types
-from pydantic import TypeAdapter
+import json
+import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
 
-MODEL = "gemini-2.0-flash"
+MODEL = "gemini-1.5-flash"  # Model Gemini yang digunakan
 
-# TODO: Ambil API key dari file .env
-# Gunakan os.getenv("NAMA_ENV_VARIABLE") untuk mengambil API Key dari file .env.
-# Pastikan di file .env terdapat baris: GEMINI_API_KEY=your_api_key
-GOOGLE_API_KEY = ...
+# Ambil API key dari .env
+GOOGLE_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GOOGLE_API_KEY:
+    raise ValueError("GEMINI_API_KEY not found in .env file")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CHAT_HISTORY_FILE = os.path.join(BASE_DIR, "chat_history.json")
 
-# Prompt sistem yang digunakan untuk membimbing gaya respons LLM
+# Instruksi sistem untuk AI
 system_instruction = """
 You are a responsive, intelligent, and fluent virtual assistant who communicates in Indonesian.
 Your task is to provide clear, concise, and informative answers in response to user queries or statements spoken through voice.
@@ -36,52 +37,44 @@ Assistant: Presiden Indonesia saat ini adalah Joko Widodo.
 If you're unsure about an answer, be honest and say that you don't know.
 """
 
-# TODO: Inisialisasi klien Gemini dan konfigurasi prompt
-# Gunakan genai.Client(api_key=...) untuk membuat klien.
-# Gunakan types.GenerateContentConfig(system_instruction=...) untuk membuat konfigurasi awal.
-# Jika ingin melihat contoh implementasi, baca dokumentasi resmi Gemini:
-# https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb
-client = ...
-chat_config = ...
-history_adapter = TypeAdapter(list[types.Content])
+# Konfigurasi dan inisialisasi model
+genai.configure(api_key=GOOGLE_API_KEY)
+model = genai.GenerativeModel(model_name=MODEL, system_instruction=system_instruction)
 
-# Fungsi untuk menyimpan/memuat riwayat chat
-def export_chat_history(chat) -> str:
-    return history_adapter.dump_json(chat.get_history()).decode("utf-8")
-
-def save_chat_history(chat):
-    json_history = export_chat_history(chat)
-    with open(CHAT_HISTORY_FILE, "w", encoding="utf-8") as f:
-        f.write(json_history)
+def save_chat_history(history):
+    try:
+        with open(CHAT_HISTORY_FILE, "w", encoding="utf-8") as f:
+            json.dump(history, f, indent=2, ensure_ascii=False)
+    except Exception as e:
+        print(f"[ERROR] Gagal menyimpan riwayat chat: {e}")
 
 def load_chat_history():
-    if not os.path.exists(CHAT_HISTORY_FILE):
-        return client.chats.create(model=MODEL, config=chat_config)
-    
-    if os.path.getsize(CHAT_HISTORY_FILE) == 0:
-        return client.chats.create(model=MODEL, config=chat_config)
-
-    with open(CHAT_HISTORY_FILE, "r", encoding="utf-8") as f:
-        json_str = f.read().strip()
-
-    if not json_str:
-        return client.chats.create(model=MODEL, config=chat_config)
+    if not os.path.exists(CHAT_HISTORY_FILE) or os.path.getsize(CHAT_HISTORY_FILE) == 0:
+        return model.start_chat(history=[])
 
     try:
-        history = history_adapter.validate_json(json_str)
-        return client.chats.create(model=MODEL, config=chat_config, history=history)
+        with open(CHAT_HISTORY_FILE, "r", encoding="utf-8") as f:
+            history = json.load(f)
+            return model.start_chat(history=history)
     except Exception as e:
-        print(f"[ERROR] Gagal load history chat: {e}")
-        return client.chats.create(model=MODEL, config=chat_config)
+        print(f"[ERROR] Gagal memuat riwayat chat: {e}")
+        return model.start_chat(history=[])
 
-# Inisialisasi sesi chat saat aplikasi dimulai
 chat = load_chat_history()
 
-# Kirim prompt ke LLM dan kembalikan respons teks
 def generate_response(prompt: str) -> str:
     try:
         response = chat.send_message(prompt)
-        save_chat_history(chat)
-        return response.text.strip()
+        save_chat_history(chat.history)
+        return response.text or "[ERROR] No response from model"
     except Exception as e:
         return f"[ERROR] {str(e)}"
+
+# Untuk pengujian langsung
+if __name__ == "__main__":
+    while True:
+        user_input = input("You: ")
+        if user_input.lower() in ['exit', 'quit']:
+            break
+        response = generate_response(user_input)
+        print("Assistant:", response)
