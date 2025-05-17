@@ -207,47 +207,78 @@ def refresh_logs():
     """Manual refresh for logs"""
     return get_combined_logs()
 
+# Custom CSS for a more elegant UI
+custom_css = """
+.main-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.status-indicator {
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: inline-block;
+    font-weight: bold;
+}
+.online {
+    background-color: rgba(0, 255, 0, 0.2);
+    color: #006400;
+}
+.offline {
+    background-color: rgba(255, 0, 0, 0.2);
+    color: #8B0000;
+}
+.header-content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.8em;
+    color: #888;
+}
+"""
+
 # UI Gradio
-with gr.Blocks(theme=gr.themes.Soft()) as demo:
-    gr.Markdown("# 🎙️ Voice Chatbot")
-    gr.Markdown("Berbicara langsung ke mikrofon dan dapatkan jawaban suara dari asisten AI.")
+with gr.Blocks(theme=gr.themes.Soft(), css=custom_css) as demo:
+    with gr.Row(elem_classes="header-content"):
+        gr.Markdown("# 🎙️ Voice Chatbot")
+        gr.Markdown("Berbicara langsung ke mikrofon dan dapatkan jawaban suara dari asisten AI.")
     
+    # Main chat interface (visible by default)
     with gr.Row():
-        api_url_input = gr.Textbox(
-            label="API URL", 
-            value=API_URL,
-            info="URL API server voice chatbot"
-        )
-        check_btn = gr.Button("🔄 Check Connection")
+        with gr.Column(scale=1):
+            audio_input = gr.Audio(
+                sources="microphone", 
+                type="numpy",
+                label="🎤 Rekam Pertanyaan Anda"
+            )
+            submit_btn = gr.Button("🔁 Submit", variant="primary", size="lg")
+            status_box = gr.Textbox(label="Status", value="Siap menerima input suara")
+        
+        with gr.Column(scale=1):
+            audio_output = gr.Audio(
+                type="filepath",
+                label="🔊 Balasan dari Asisten"
+            )
+            process_info = gr.Markdown("### Detail Proses\nAkan muncul setelah respons diterima")
     
-    connection_status = gr.Markdown("### Status koneksi belum diperiksa")
-    
-    check_btn.click(
-        fn=check_connection,
-        inputs=api_url_input,
-        outputs=connection_status
-    )
-    
-    with gr.Tabs():
-        with gr.TabItem("Chat"):
-            with gr.Row():
-                with gr.Column(scale=1):
-                    audio_input = gr.Audio(
-                        sources="microphone", 
-                        type="numpy",
-                        label="🎤 Rekam Pertanyaan Anda"
-                    )
-                    submit_btn = gr.Button("🔁 Submit", variant="primary")
-                    status_box = gr.Textbox(label="Status", value="Siap menerima input suara")
+    # Advanced settings in collapsible section
+    with gr.Accordion("Advanced Settings", open=False):
+        with gr.Row():
+            with gr.Column(scale=2):
+                api_url_input = gr.Textbox(
+                    label="API URL", 
+                    value=API_URL,
+                    info="URL API server voice chatbot"
+                )
+            with gr.Column(scale=1):
+                check_btn = gr.Button("🔄 Check Connection")
                 
-                with gr.Column(scale=1):
-                    audio_output = gr.Audio(
-                        type="filepath",
-                        label="🔊 Balasan dari Asisten"
-                    )
-                    process_info = gr.Markdown("### Detail Proses\nAkan muncul setelah respons diterima")
-            
-        with gr.TabItem("Logs"):
+        connection_status = gr.Markdown("### Status koneksi belum diperiksa")
+        
+        # Logs in nested accordion
+        with gr.Accordion("System Logs", open=False):
             with gr.Row():
                 clear_logs_btn = gr.Button("🗑️ Clear Logs")
                 refresh_logs_btn = gr.Button("🔄 Refresh Logs")
@@ -255,22 +286,14 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             process_log_output = gr.Textbox(
                 label="Process Logs", 
                 value="Logs akan muncul di sini", 
-                lines=20,
-                max_lines=30
-            )
-            
-            clear_logs_btn.click(
-                fn=clear_logs,
-                inputs=[],
-                outputs=process_log_output
-            )
-            
-            refresh_logs_btn.click(
-                fn=refresh_logs,
-                inputs=[],
-                outputs=process_log_output
+                lines=10,
+                max_lines=20
             )
     
+    # Footer
+    with gr.Row(elem_classes="footer"):
+        gr.Markdown("© 2025 Voice Chatbot System")
+            
     # Connect the UI elements to functions
     submit_btn.click(
         fn=voice_chat,
@@ -278,7 +301,25 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         outputs=[audio_output, status_box, process_info]
     )
     
-    # Check connection on start
+    check_btn.click(
+        fn=check_connection,
+        inputs=api_url_input,
+        outputs=connection_status
+    )
+    
+    clear_logs_btn.click(
+        fn=clear_logs,
+        inputs=[],
+        outputs=process_log_output
+    )
+    
+    refresh_logs_btn.click(
+        fn=refresh_logs,
+        inputs=[],
+        outputs=process_log_output
+    )
+    
+    # Check connection on load but without blocking UI
     demo.load(
         fn=check_connection,
         inputs=[api_url_input],

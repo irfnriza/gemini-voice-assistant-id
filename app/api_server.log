@@ -79,3 +79,46 @@
 2025-05-10 15:32:01,376 - voice-chatbot - INFO - TTS output saved to C:\Users\user\AppData\Local\Temp\tts_6aaae5f3-474a-494c-85b1-fb5f0c3a044a.wav
 2025-05-10 15:59:00,670 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_e8689e3c-15d9-4a02-a74e-ae299c80ccd9.wav
 2025-05-10 15:59:00,674 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_6aaae5f3-474a-494c-85b1-fb5f0c3a044a.wav
+2025-05-15 21:02:20,584 - voice-chatbot - INFO - Audio saved to C:\Users\user\AppData\Local\Temp\tmp16x2z4uy\468a80b6-c4de-45cb-a71b-400e8e8a9002.wav
+2025-05-15 21:02:40,151 - voice-chatbot - INFO - Transcribed text:  Hello Jiminay, can you help me to explain what LLM is?
+
+2025-05-15 21:02:41,547 - voice-chatbot - INFO - AI Response: LLM atau Large Language Model adalah model bahasa besar yang dilatih pada sejumlah besar teks dan kode, sehingga mampu menghasilkan teks, menerjemahkan bahasa, dan menjawab pertanyaan dengan cara yang informatif.  LLM bekerja berdasarkan pola dan hubungan dalam data yang telah dipelajarinya.
+
+2025-05-15 21:03:23,448 - voice-chatbot - INFO - TTS output saved to C:\Users\user\AppData\Local\Temp\tts_1095ac97-bb22-4276-9711-a7487671aff1.wav
+2025-05-15 21:05:34,858 - voice-chatbot - INFO - Audio saved to C:\Users\user\AppData\Local\Temp\tmpnpbyeran\53664e75-c755-4e1b-858a-65d456532ff9.wav
+2025-05-15 21:06:00,667 - voice-chatbot - INFO - Transcribed text:  Hello, can you explain to me how to solder the onion well, I just solder it, it always dies.
+
+2025-05-15 21:06:01,644 - voice-chatbot - INFO - AI Response: Maaf, saya tidak yakin dengan maksud "menyolder bawang".  Apakah Anda mungkin salah kata?  Jika Anda ingin bertanya tentang cara menyolder komponen elektronik, mohon jelaskan lebih detail komponen dan permasalahan yang Anda hadapi.
+
+2025-05-15 21:06:43,199 - voice-chatbot - INFO - TTS output saved to C:\Users\user\AppData\Local\Temp\tts_ad344873-d6d7-42ad-a8d1-e5651d58890b.wav
+2025-05-15 21:07:58,308 - voice-chatbot - INFO - Audio saved to C:\Users\user\AppData\Local\Temp\tmpg3s5my0y\c04ee91f-6021-4bba-856c-3946e09cec5a.wav
+2025-05-15 21:08:14,394 - voice-chatbot - INFO - Transcribed text:  Can you tell me why the rain has stopped?
+
+2025-05-15 21:08:15,456 - voice-chatbot - INFO - AI Response: Sistem cuaca sangat kompleks, sehingga saya tidak dapat menjelaskan secara pasti mengapa hujan berhenti.  Kemungkinan besar, pola tekanan udara atau sistem cuaca telah berubah.
+
+2025-05-15 21:08:40,720 - voice-chatbot - INFO - TTS output saved to C:\Users\user\AppData\Local\Temp\tts_215b5529-19e8-4d7e-8f00-62437d81f410.wav
+2025-05-15 21:21:05,897 - voice-chatbot - INFO - Audio saved to C:\Users\user\AppData\Local\Temp\tmpmh739ebu\f2c94a24-7e50-45a8-9c1e-45772c0342f2.wav
+2025-05-15 21:21:26,387 - voice-chatbot - INFO - Transcribed text:  Hello, how can you explain how the process happened?
+ Imagine I was a small child, so explain it in a short way, but still in detail.
+
+2025-05-15 21:21:27,793 - voice-chatbot - INFO - AI Response: Bayangkan ada banyak balok LEGO.  Kita susun balok-balok itu sesuai aturan tertentu.  Kemudian, kita kasih balok baru, dan dia otomatis menyesuaikan susunannya berdasarkan aturan itu.  Begitulah kira-kira cara kerjanya;  menerima informasi baru dan mengolahnya berdasarkan aturan yang sudah diprogram.
+
+2025-05-15 21:21:58,859 - voice-chatbot - INFO - TTS output saved to C:\Users\user\AppData\Local\Temp\tts_bcff91ab-f165-463d-8971-75d025f0d6b4.wav
+2025-05-15 21:25:32,840 - voice-chatbot - INFO - Audio saved to C:\Users\user\AppData\Local\Temp\tmp912g02jy\297c9b4c-a022-4be6-9ee6-97867c1fdc17.wav
+2025-05-15 21:25:54,043 - voice-chatbot - INFO - Transcribed text:  Hello Diminae, can you explain to me how an AI like you can figure it out with an explanation?
+
+2025-05-15 21:25:56,281 - voice-chatbot - INFO - AI Response: Saya dilatih dengan banyak sekali data teks dan kode.  Ketika Anda bertanya, saya mencari pola dan hubungan dalam data tersebut untuk menemukan jawaban yang paling sesuai dan relevan.  Prosesnya mirip seperti mencari kata dalam kamus raksasa.
+
+2025-05-15 21:26:23,827 - voice-chatbot - INFO - TTS output saved to C:\Users\user\AppData\Local\Temp\tts_06cf1435-2681-403f-b7f5-0785daf49c24.wav
+2025-05-15 21:28:30,410 - voice-chatbot - INFO - Audio saved to C:\Users\user\AppData\Local\Temp\tmphu8avmvd\c7977fb3-9d73-4f5b-af45-2d1b5569ecab.wav
+2025-05-15 21:28:52,094 - voice-chatbot - INFO - Transcribed text:  Hello Gemini, can you explain to me how the rain can work and how much water can grow to earth?
+
+2025-05-15 21:28:53,170 - voice-chatbot - INFO - AI Response: Hujan terjadi karena uap air di udara mengembun dan membentuk awan.  Saat awan jenuh, air jatuh sebagai hujan.  Jumlah air yang jatuh ke bumi bervariasi tergantung banyak faktor, seperti ukuran awan, durasi hujan, dan lokasi geografis.
+
+2025-05-15 21:29:21,057 - voice-chatbot - INFO - TTS output saved to C:\Users\user\AppData\Local\Temp\tts_94731a61-fbd6-4ffe-93e3-c47a2a346958.wav
+2025-05-15 21:44:41,806 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_1095ac97-bb22-4276-9711-a7487671aff1.wav
+2025-05-15 21:44:41,808 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_ad344873-d6d7-42ad-a8d1-e5651d58890b.wav
+2025-05-15 21:44:41,810 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_215b5529-19e8-4d7e-8f00-62437d81f410.wav
+2025-05-15 21:44:41,813 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_bcff91ab-f165-463d-8971-75d025f0d6b4.wav
+2025-05-15 21:44:41,814 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_06cf1435-2681-403f-b7f5-0785daf49c24.wav
+2025-05-15 21:44:41,818 - voice-chatbot - INFO - Cleaned up temp file: C:\Users\user\AppData\Local\Temp\tts_94731a61-fbd6-4ffe-93e3-c47a2a346958.wav
