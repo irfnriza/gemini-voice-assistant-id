@@ -8,3 +8,4 @@ app/__pycache__/
 app/whisper.cpp
 app/coqui_utils/
 app/.env
+*.pth
