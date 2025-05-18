@@ -1,14 +1,77 @@
-# Voice Chatbot UAS – STT, Gemini LLM, TTS Integration
+🎙️ Voice Chatbot System
+A complete voice-based AI assistant that allows users to speak directly to an AI and receive spoken responses in return.
+📝 Project Overview
+This project implements a voice interaction pipeline consisting of three main components:
 
-Proyek UAS ini merupakan aplikasi chatbot berbasis suara yang memungkinkan pengguna berbicara langsung melalui antarmuka web. Sistem akan mengenali suara pengguna, mengubahnya menjadi teks (Speech-to-Text), memprosesnya menggunakan model bahasa besar (Gemini API), lalu mengubah hasil jawabannya kembali menjadi suara (Text-to-Speech).
+Speech-to-Text (STT): Converting user's voice input to text
+Language Model (LLM): Processing the text input and generating responses
+Text-to-Speech (TTS): Converting the AI's text response back to speech
 
-## 📌 Fitur Utama
-- 🎙️ Speech-to-Text (STT) menggunakan `whisper.cpp` dari OpenAI.
-- 🧠 LLM Integration menggunakan Google Gemini API untuk menghasilkan respons dalam Bahasa Indonesia.
-- 🔊 Text-to-Speech (TTS) menggunakan model Coqui TTS (Indonesian TTS).
-- 🧪 Antarmuka pengguna interaktif berbasis `Gradio` untuk pengujian langsung dari browser.
+The system is architected with a separate backend API (FastAPI) and frontend UI (Gradio), enabling flexible deployment options.
+🔧 Technology Stack
+Backend (main.py)
 
-## 🗂️ Struktur Proyek
+FastAPI: RESTful API framework handling audio processing pipeline
+Whisper.cpp: Efficient speech recognition for transcribing user audio
+Google Gemini API: Large Language Model for generating responses
+Coqui TTS: Text-to-speech synthesis for natural-sounding responses
+
+Frontend (app.py)
+
+Gradio: Web-based UI for voice interaction
+Bilingual Support: Interface available in both English and Indonesian
+Process Monitoring: Real-time logs and performance metrics
+
+🚀 Getting Started
+Prerequisites
+
+Python 3.9+
+FFmpeg (for audio processing)
+Whisper.cpp installed
+Google API Key for Gemini API
+Coqui TTS model
+
+Installation
+
+Clone the repository
+
+bashgit clone https://github.com/yourusername/voice-chatbot.git
+cd voice-chatbot
+
+Install dependencies
+
+bashpip install -r requirements.txt
+
+Create a .env file with required API keys and paths
+
+GOOGLE_API_KEY=your_google_api_key
+WHISPER_BINARY=/path/to/whisper/binary
+COQUI_MODEL_PATH=/path/to/coqui/model
+Running the Application
+
+Start the backend server
+
+bashpython main.py
+
+In another terminal, start the frontend
+
+bashpython app.py
+
+Open your browser and navigate to the URL shown in the terminal (typically http://127.0.0.1:7860)
+
+🔄 Usage Flow
+
+Click the microphone button and speak your question
+The system will:
+
+Convert your speech to text using Whisper
+Process the text through the Gemini API
+Convert the response to speech using Coqui TTS
+Play back the audio response
+
+
+
+🛠️ Project Structure
 ```
 voice_chatbot_project/
 │
@@ -27,11 +90,47 @@ voice_chatbot_project/
 ├── requirements.txt       # Daftar dependensi Python
 ```
 
-## 📚 Catatan
-- Semua file audio menggunakan format `.wav`.
-- Untuk menghasilkan fonem seperti `dəˈnɡan`, teks dari Gemini harus dikonversi ke fonetik.
-- Disarankan menggunakan model Whisper: `ggml-large-v3-turbo`.
-- Gunakan speaker: `wibowo` dari model Coqui v1.2.
+📊 Performance Considerations
+The system logs detailed performance metrics for each processing stage:
 
-## 👨‍💻 Dibuat Untuk
-Proyek UAS mata kuliah *Pemrosesan Bahasa Alami* — Semester Genap 2024/2025.
+Speech-to-text transcription time
+LLM response generation time
+Text-to-speech synthesis time
+Total processing time
+
+These metrics help identify bottlenecks and optimization opportunities.
+🔍 Challenges and Solutions
+Integration Complexity
+
+Challenge: Connecting three separate AI models (STT, LLM, TTS) with different input/output formats
+Solution: Created a modular architecture with clear interfaces between components
+
+Latency Management
+
+Challenge: Multi-step processing pipeline introduced significant latency
+Solution: Implemented asynchronous processing where possible and optimized data passing between components
+
+Debugging Across Components
+
+Challenge: Difficulty in tracking errors across the complete pipeline
+Solution: Implemented comprehensive logging system with detailed process information
+
+🔮 Future Improvements
+
+Add conversation memory to maintain context across interactions
+Implement streaming responses for lower perceived latency
+Support additional languages beyond English and Indonesian
+Add voice fingerprinting for multi-user support
+
+
+📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+🔗 Related Links
+
+Whisper.cpp
+Google Gemini API
+Coqui TTS
+FastAPI
+Gradio
+
