@@ -1,0 +1,10 @@
+# Abaikan file konfigurasi lokal dan lingkungan
+.env
+.venv/
+.vscode/
+
+# Abaikan file/folder spesifik di dalam folder app/
+app/__pycache__/
+app/whisper.cpp
+app/coqui_utils/
+app/.env
